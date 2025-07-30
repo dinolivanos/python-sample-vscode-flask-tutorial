@@ -31,13 +31,15 @@ stages:
   - job: BuildJob
     pool: dins-agent-pool
     steps:
-    - task: UsePythonVersion@0
-      inputs:
-        versionSpec: '$(pythonVersion)'
-        disableDownloadFromRegistry: true
-        addToPath: true
-        architecture: 'x64'
-      displayName: 'Use Python $(pythonVersion)'
+    - script: |
+        sudo apt update
+        sudo apt install -y python3.12 python3.12-venv python3.12-distutils
+      displayName: 'Install Python 3.12 via APT'
+    
+    - script: |
+        python3.12 --version
+        python3.12 -m pip install --upgrade pip
+      displayName: 'Verify Python 3.12'
 
     - script: |
         python -m venv antenv
@@ -74,13 +76,16 @@ stages:
         deploy:
           steps:
 
-          - task: UsePythonVersion@0
-            inputs:
-              versionSpec: '$(pythonVersion)'
-              disableDownloadFromRegistry: true
-              addToPath: true
-              architecture: 'x64'
-            displayName: 'Use Python version'
+          - script: |
+              sudo apt update
+              sudo apt install -y python3.12 python3.12-venv python3.12-distutils
+            displayName: 'Install Python 3.12 via APT'
+          
+          - script: |
+              python3.12 --version
+              python3.12 -m pip install --upgrade pip
+            displayName: 'Verify Python 3.12'
+
 
           - task: AzureWebApp@1
             displayName: 'Deploy Azure Web App : dino-flask-app4'
