@@ -32,15 +32,11 @@ stages:
     pool: dins-agent-pool
     steps:
     - script: |
-        where python
-        sudo apt update
-        sudo apt install -y python3.12 python3.12-venv
-        where python
-        where python3.12
+        python3.12 --version
       displayName: 'Install Python 3.12 via APT'
 
     - script: |
-        python -m venv antenv
+        python3.12 -m venv antenv
         source antenv/bin/activate
         python -m pip install --upgrade pip
         pip install setup
