@@ -33,7 +33,7 @@ stages:
     steps:
     - script: |
         sudo apt update
-        sudo apt install -y python3.12 python3.12-venv python3.12-distutils
+        sudo apt install -y python3.12 python3.12-venv
       displayName: 'Install Python 3.12 via APT'
     
     - script: |
@@ -78,7 +78,7 @@ stages:
 
           - script: |
               sudo apt update
-              sudo apt install -y python3.12 python3.12-venv python3.12-distutils
+              sudo apt install -y python3.12 python3.12-venv
             displayName: 'Install Python 3.12 via APT'
           
           - script: |
