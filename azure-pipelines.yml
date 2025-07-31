@@ -69,7 +69,9 @@ stages:
       runOnce:
         deploy:
           steps:
-
+          - script: |
+              python3.12 --version
+            displayName: 'Install Python 3.12 via APT'
           - task: AzureWebApp@1
             displayName: 'Deploy Azure Web App : dino-flask-app4'
             inputs:
